@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+# NOTE: We use apt-get instead of apt for non-interactive package installation
+# as apt will prompt services restart for some of the packages below which will
+# make the SDK installation stall forever.
+ 
+OPENJDK_INSTALL_PREFIX="${OPENJDK_INSTALL_PREFIX:-"/usr/lib/jvm"}"
+OPENJDK_INSTALL_PLATFORM="${OPENJDK_INSTALL_PLATFORM:-$(cat "$SDK/platform")}"
+OPENJDK_INSTALL_VERSION="${OPENJDK_INSTALL_VERSION:-$(cat "$SDK/version")}"
+OPENJDK_INSTALL_ROOT="${OPENJDK_INSTALL_PREFIX}/java-${OPENJDK_INSTALL_VERSION}-openjdk-${OPENJDK_INSTALL_PLATFORM}"
+
+apt-get -y update
+apt-get -y install "openjdk-${OPENJDK_INSTALL_VERSION}-jdk"
+
+cat <<EOF >/etc/profile.d/openjdk.sh
+export JAVA_HOME="$OPENJDK_INSTALL_ROOT"
+EOF

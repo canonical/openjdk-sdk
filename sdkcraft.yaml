@@ -1,0 +1,41 @@
+name: openjdk
+adopt-info: openjdk
+license: Apache-2.0
+website: https://github.com/canonical/openjdk-sdk
+summary: OpenJDK Workshop SDK
+description: |
+  This SDK provides the OpenJDK toolchain for building, testing and running
+  Java projects. Maven and Gradle runtime data are persisted on the host to
+  speed up builds across workshop updates.
+
+platforms:
+  ubuntu@26.04:amd64:
+  ubuntu@26.04:arm64:
+  ubuntu@24.04:amd64:
+  ubuntu@24.04:arm64:
+  ubuntu@22.04:amd64:
+  ubuntu@22.04:arm64:
+
+plugs:
+  maven-cache:
+    interface: mount
+    workshop-target: /home/workshop/.m2
+
+  gradle-cache:
+    interface: mount
+    workshop-target: /home/workshop/.gradle
+
+parts:
+  openjdk:
+    plugin: nil
+    override-pull: |
+      VERSION=$(cat "$CRAFT_PROJECT_DIR/VERSION")
+      craftctl set version="$VERSION"
+    override-build: |
+      VERSION=$(cat "$CRAFT_PROJECT_DIR/VERSION")
+      MAJOR=$(echo "$VERSION" | cut -d. -f1)
+      PLATFORM=$(echo "$CRAFT_PLATFORM" | cut -d: -f2)
+
+      # Map version major and arch for the setup-base hook
+      echo "${MAJOR}" > "$CRAFT_PART_INSTALL/version"
+      echo "${PLATFORM}" > "$CRAFT_PART_INSTALL/platform"

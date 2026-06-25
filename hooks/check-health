@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+if [[ ! -x "$JAVA_HOME" ]]; then
+  workshopctl set-health --code="java-not-installed" error "Java SDK not installed."
+  exit 0
+fi
+
+if ! sudo -u workshop --login java --version >/dev/null 2>&1; then
+  workshopctl set-health --code="java-not-on-path" error "Binary 'java' not available on the \$PATH."
+  exit 0
+fi
+
+if ! sudo -u workshop --login javac --version >/dev/null 2>&1; then
+  workshopctl set-health --code="javac-not-on-path" error "Binary 'javac' not available on the \$PATH."
+  exit 0
+fi
+
+workshopctl set-health okay
