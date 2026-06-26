@@ -1,11 +1,8 @@
 # OpenJDK SDK for Workshop
 
-[Brief description of what this SDK provides. Should closely match the
-sdkcraft.yaml description. Focus on how the SDK affects the development
-environment: what toolchain/runtime it provides, what it persists on the host,
-and any notable features. Example: "A development environment for Go projects.
-It provides the official Go toolchain, manages module caches via persistent
-mounts, and preserves Go environment settings across workshop updates."]
+A development environment for Java projects. It provides versioned LTS releases
+of the OpenJDK toolchain, documentation and gives access to the standard `java`
+and `javac` CLI commands for building and running your applications.
 
 ---
 
@@ -22,12 +19,13 @@ sdks:
     channel: 21/stable
 
 actions:
-  [action-name]: |
-    [command]
+  build: javac "$@"
+  launch: java "$@
 ```
 
-[One sentence explaining what this demonstrates, e.g., "This demonstrates a
-basic Go build workflow with persistent module caching."]
+This demonstrates a basic Java build workflow with OpenJDK only.
+
+### Build
 
 ---
 
@@ -35,66 +33,26 @@ basic Go build workflow with persistent module caching."]
 
 ### Prerequisites, project layout
 
-1. [List prerequisites, e.g., "This relies on the `uv` SDK for venv."]
-2. [Suggest expected project directory structure, including source code layout
-   and setup steps needed:]
+1. No prerequisite SDKs are required.
+2. Your Java project should be in your project directory.
+3. On launch, the SDK configures `JAVA_HOME`. No dependencies or build management tools are pre-installed; Maven or Gradle support can be included through the relevant SDKs.
 
-   ```bash
-   [command to clone or prepare sources]
-   ```
-
-3. [Describe what side effects may happen during launch and refresh.]
-
-### [Primary workflow task, e.g., "Build the project"]
+### Build and execute an application
 
 Once the workshop is ready:
 
 ```bash
-[workshop run]
-[commands to perform the primary task]
+workshop run build [...options]
+workshop run execute [...options]
 ```
-
-[Explain where outputs go and how they persist across workshop updates.]
-
-### [Secondary workflow task, e.g., "Test and run"]
-
-From within the workshop shell:
-
-```bash
-workshop shell
-[test or run commands]
-```
-
-[Brief explanation of what this achieves.]
 
 ---
 
 ## Plugs (resources this SDK consumes)
 
-### `[plug-name]`
-
-- Interface: `mount`
-- Workshop target: `[/path/inside/workshop]`
-- Purpose: [What this persists between workshop updates.]
-
-### `[plug-name]`
-
-- Interface: `gpu`
-- Purpose: Grants access to [AMD/NVIDIA] GPU hardware on the host.
-
--- OR --
-
 This SDK doesn't define any plugs.
 
 ## Slots (resources this SDK provides)
-
-### `[slot-name]`
-
-- Interface: `mount`
-- Workshop source: `[/path/inside/workshop]`
-- Purpose: [What resource this exposes to other SDKs]
-
--- OR --
 
 This SDK doesn't define any slots.
 
@@ -102,14 +60,15 @@ This SDK doesn't define any slots.
 
 ## Documentation and guidance
 
-- [[XYZ] official documentation]([upstream-docs-url])
-- [[XYZ] best practices]([public-website-url])
+- [OpenJDK documentation](https://wiki.openjdk.org/)
+- [Workshop documentation](https://ubuntu.com/workshop/docs/)
 
 ---
 
 ## Community and support
 
-- [XYZ] community forum: [Link to upstream forum/community]
+- OpenJDK community: [OpenJDK Website](https://openjdk.org/)
+- Workshop forum: [Discourse](https://discourse.ubuntu.com/)
 - Please review our [Code of Conduct](https://ubuntu.com/community/ethos/code-of-conduct)
   before participating.
 
@@ -120,13 +79,13 @@ This SDK doesn't define any slots.
 All contributions, including code, documentation updates, and issue reports,
 are welcome!
 
-- See [CONTRIBUTING]([public-github-url]) for guidelines.
-- Open issues or pull requests on the [official repository]([repo-url]).
+- See `CONTRIBUTING.md` for guidelines.
+- Open issues or pull requests on the official repository.
 
 ---
 
 ## License and copyright
 
-Copyright [START YEAR] [COPYRIGHT HOLDER].
+Copyright 2026 Canonical Ltd.
 
 [Include any required claims, information, and disclaimers for your license.]
