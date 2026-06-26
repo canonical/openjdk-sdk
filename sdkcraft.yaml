@@ -5,8 +5,7 @@ website: https://github.com/canonical/openjdk-sdk
 summary: OpenJDK Workshop SDK
 description: |
   This SDK provides the OpenJDK toolchain for building, testing and running
-  Java projects. Maven and Gradle runtime data are persisted on the host to
-  speed up builds across workshop updates.
+  Java projects.
 
 platforms:
   ubuntu@26.04:amd64:
@@ -15,15 +14,6 @@ platforms:
   ubuntu@24.04:arm64:
   ubuntu@22.04:amd64:
   ubuntu@22.04:arm64:
-
-plugs:
-  maven-cache:
-    interface: mount
-    workshop-target: /home/workshop/.m2
-
-  gradle-cache:
-    interface: mount
-    workshop-target: /home/workshop/.gradle
 
 parts:
   openjdk:
