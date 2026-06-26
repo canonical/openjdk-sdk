@@ -1,0 +1,28 @@
+summary: Compile and run a Java application with the OpenJDK SDK
+
+prepare: |
+  envsubst '${BASE}' <workshop.yaml.in >workshop.yaml
+  workshop launch
+
+restore: |
+  workshop remove || true
+
+execute: |
+  # Prepare a "Hello, World!" application written in java
+  workshop exec -- mkdir -p /home/workshop/hello
+  workshop exec -- tee /home/workshop/hello/App.java >/dev/null <<'APP'
+  public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+  }
+  APP
+
+  # Compile the application using "javac" directly
+  workshop exec -w /home/workshop/hello -- javac App.java -d out
+
+  # Execute the application using "java"
+  workshop exec -w /home/workshop/hello/out -- java App
+
+debug: |
+  workshop tasks
