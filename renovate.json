@@ -7,17 +7,37 @@
       "customType": "regex",
       "managerFilePatterns": ["/^VERSION$/"],
       "matchStrings": ["(?<currentValue>[0-9.]+)"],
-      "depNameTemplate": "TODO_DEP_NAME",
-      "datasourceTemplate": "TODO_DATASOURCE",
+      "depNameTemplate": "java",
+      "datasourceTemplate": "java-version",
       "versioningTemplate": "semver"
     }
   ],
-  "baseBranchPatterns": ["TODO_BRANCH"],
+  "baseBranchPatterns": ["8", "11", "17", "21", "25"],
   "packageRules": [
     {
-      "matchPackageNames": ["TODO_DEP_NAME"],
-      "matchBaseBranches": ["TODO_BRANCH"],
-      "allowedVersions": "/^TODO_VERSION_PREFIX\\./"
+      "matchPackageNames": ["java-jdk"],
+      "matchBaseBranches": ["8"],
+      "allowedVersions": "/^8\\./"
+    },
+    {
+      "matchPackageNames": ["java-jdk"],
+      "matchBaseBranches": ["11"],
+      "allowedVersions": "/^11\\./"
+    },
+    {
+      "matchPackageNames": ["java-jdk"],
+      "matchBaseBranches": ["17"],
+      "allowedVersions": "/^17\\./"
+    },
+    {
+      "matchPackageNames": ["java-jdk"],
+      "matchBaseBranches": ["21"],
+      "allowedVersions": "/^21\\./"
+    },
+    {
+      "matchPackageNames": ["java-jdk"],
+      "matchBaseBranches": ["25"],
+      "allowedVersions": "/^25\\./"
     }
   ]
 }
