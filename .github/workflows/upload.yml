@@ -1,0 +1,37 @@
+name: Build and Upload SDK
+
+on:
+  push:
+    branches:
+      - "[0-9]+"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch name (e.g., 17)"
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-upload-amd64:
+    uses: canonical/sdkcraft-actions/.github/workflows/upload.yml@main
+    with:
+      platforms: '["ubuntu@22.04:amd64","ubuntu@24.04:amd64","ubuntu@26.04:amd64"]'
+      platform-flag: "--platform"
+      track: latest
+      risk: "stable"
+    secrets:
+      SDKCRAFT_STORE_CREDENTIALS: ${{ secrets.SDKCRAFT_STORE_CREDENTIALS_STAGING }}
+  build-and-upload-arm64:
+    uses: canonical/sdkcraft-actions/.github/workflows/upload.yml@main
+    with:
+      platforms: '["ubuntu@22.04:arm64","ubuntu@24.04:arm64","ubuntu@26.04:arm64"]'
+      platform-flag: "--platform"
+      runs-on: '["self-hosted-linux-arm64-noble-xlarge"]'
+      track: latest
+      risk: "stable"
+    secrets:
+      SDKCRAFT_STORE_CREDENTIALS: ${{ secrets.SDKCRAFT_STORE_CREDENTIALS_STAGING }}
