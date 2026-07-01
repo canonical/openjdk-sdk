@@ -12,18 +12,8 @@
       "versioningTemplate": "semver"
     }
   ],
-  "baseBranchPatterns": ["8", "11", "17", "21", "25"],
+  "baseBranchPatterns": ["17", "21", "25"],
   "packageRules": [
-    {
-      "matchPackageNames": ["java-jdk"],
-      "matchBaseBranches": ["8"],
-      "allowedVersions": "/^8\\./"
-    },
-    {
-      "matchPackageNames": ["java-jdk"],
-      "matchBaseBranches": ["11"],
-      "allowedVersions": "/^11\\./"
-    },
     {
       "matchPackageNames": ["java-jdk"],
       "matchBaseBranches": ["17"],
