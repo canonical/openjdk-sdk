@@ -23,7 +23,28 @@ actions:
   launch: java "$@
 ```
 
-This demonstrates a basic Java build workflow with OpenJDK only.
+This demonstrates a basic Java build workflow with OpenJDK only. To include support for debugging via JDWP, the following slot can be exposed:
+
+```yaml
+# workshop.yaml
+name: openjdk-app
+base: ubuntu@24.04
+sdks:
+  - name: openjdk
+    channel: 21/stable
+    slots:
+      jdwp:
+        interface: tunnel
+        address: 5005 # port in the workshop
+  - name: system
+    plugs:
+      jdwp:
+        interface: tunnel
+        address: 5005 # port on the host
+
+actions:
+  debug: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 "$@"
+```
 
 ### Build
 
