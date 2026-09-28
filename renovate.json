@@ -15,17 +15,17 @@
   "baseBranchPatterns": ["17", "21", "25"],
   "packageRules": [
     {
-      "matchPackageNames": ["java-jdk"],
+      "matchPackageNames": ["java"],
       "matchBaseBranches": ["17"],
       "allowedVersions": "/^17\\./"
     },
     {
-      "matchPackageNames": ["java-jdk"],
+      "matchPackageNames": ["java"],
       "matchBaseBranches": ["21"],
       "allowedVersions": "/^21\\./"
     },
     {
-      "matchPackageNames": ["java-jdk"],
+      "matchPackageNames": ["java"],
       "matchBaseBranches": ["25"],
       "allowedVersions": "/^25\\./"
     }
