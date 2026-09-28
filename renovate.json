@@ -9,7 +9,8 @@
       "matchStrings": ["(?<currentValue>[0-9.]+)"],
       "depNameTemplate": "java",
       "datasourceTemplate": "java-version",
-      "versioningTemplate": "semver"
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^(?<version>[^+]+)"
     }
   ],
   "baseBranchPatterns": ["17", "21", "25"],
